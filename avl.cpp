@@ -43,8 +43,8 @@ void AVL<T,K>::rotate_left()
 {
     //write your codes here
 	typename AVL<T,K>::node* b = dynamic_cast<AVL*>(this->right_subtree())->root;
-	dynamic_cast<AVL*>(this->root->right)->root = dynamic_cast<AVL*>(b->left)->root;
-	dynamic_cast<AVL*>(b->left)->root = this->root;
+	this->root->right = b->left;
+	b->left = dynamic_cast<AVL*>(this);
 	fix_height();
 	this->root = b;
 	fix_height();
@@ -59,12 +59,12 @@ void AVL<T,K>::rotate_right()
 {
      //write your codes here
 	typename AVL<T,K>::node* b = dynamic_cast<AVL*>(this->left_subtree())->root;
-	dynamic_cast<AVL*>(this->root->left)->root = dynamic_cast<AVL*>(b->right)->root;
-	dynamic_cast<AVL*>(b->right)->root = this->root;
+	this->root->left = b->right;
+	b->right = dynamic_cast<AVL*>(this);
 	fix_height();
 	this->root = b;
 	fix_height();
-}
+
 
 /* TODO
  * Goal: To balance an AVL tree 
